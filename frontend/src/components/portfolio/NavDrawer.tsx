@@ -27,7 +27,7 @@ export const NavDrawer: React.FC<NavDrawerProps> = ({ isOpen, onClose, onBookCal
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-black/25 backdrop-blur-xs"
+            className="absolute inset-0 bg-black/25 backdrop-blur-sm"
           />
 
           {/* Drawer Panel */}
@@ -54,7 +54,8 @@ export const NavDrawer: React.FC<NavDrawerProps> = ({ isOpen, onClose, onBookCal
 
                 <button
                   onClick={onClose}
-                  className="w-9 h-9 rounded-full bg-white border border-[#E8E8E4] flex items-center justify-center text-neutral-600 hover:bg-neutral-100 transition-colors"
+                  aria-label="Close navigation menu"
+                  className="w-9 h-9 rounded-full bg-white border border-[#E8E8E4] flex items-center justify-center text-neutral-600 hover:bg-neutral-100 transition-colors cursor-pointer"
                 >
                   <X className="w-4 h-4" />
                 </button>

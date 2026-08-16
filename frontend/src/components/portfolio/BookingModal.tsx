@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Check, ArrowRight, Loader2, Mail, CheckCircle2 } from 'lucide-react';
+import { X, Check, ArrowRight, Loader2 } from 'lucide-react';
 
 interface BookingModalProps {
   isOpen: boolean;
