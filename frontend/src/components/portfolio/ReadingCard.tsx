@@ -10,22 +10,22 @@ export const ReadingCard: React.FC = () => {
       transition={{ duration: 0.2 }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="bg-white/80 hover:bg-white/90 backdrop-blur-2xl rounded-[28px] p-6 sm:p-7 pb-0 border border-white/70 shadow-[0_8px_32px_rgba(0,0,0,0.03),inset_0_1px_0_rgba(255,255,255,0.9)] hover:shadow-[0_14px_40px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,1)] flex flex-col justify-between h-[340px] relative overflow-hidden group transition-all duration-300 select-none cursor-default"
+      className="bg-white/80 hover:bg-white/90 dark:bg-[#181816]/85 dark:hover:bg-[#20201D]/95 backdrop-blur-2xl rounded-[28px] p-6 sm:p-7 pb-0 border border-white/70 dark:border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.03),inset_0_1px_0_rgba(255,255,255,0.9)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.08)] hover:shadow-[0_14px_40px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,1)] dark:hover:shadow-[0_14px_40px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.12)] flex flex-col justify-between h-[340px] relative overflow-hidden group transition-all duration-300 select-none cursor-default"
     >
       {/* Top Header - Clean Unboxed Typography */}
       <div>
         <div className="mb-3">
-          <h3 className="text-xs font-bold text-[#8A8A85] uppercase tracking-wider">
+          <h3 className="text-xs font-bold text-[#8A8A85] dark:text-[#787872] uppercase tracking-wider">
             What I'm reading
           </h3>
         </div>
 
         {/* Book Title & Author */}
         <div className="space-y-0.5">
-          <h4 className="text-[15.5px] font-bold text-[#111111] leading-tight">
+          <h4 className="text-[15.5px] font-bold text-[#111111] dark:text-[#F4F4F2] leading-tight">
             As A Man Thinketh
           </h4>
-          <p className="text-[12px] text-[#8A8A85] font-medium">
+          <p className="text-[12px] text-[#8A8A85] dark:text-[#787872] font-medium">
             James Allen • Mindset & Philosophy
           </p>
         </div>

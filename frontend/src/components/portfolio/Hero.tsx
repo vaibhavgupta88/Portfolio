@@ -25,7 +25,7 @@ export const Hero: React.FC<HeroProps> = ({ onBookCall }) => {
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-40 bg-[#F6F6F4] pointer-events-none"
+            className="fixed inset-0 z-40 bg-[#F6F6F4] dark:bg-[#0E0E0D] pointer-events-none"
           />
         )}
       </AnimatePresence>
@@ -33,7 +33,7 @@ export const Hero: React.FC<HeroProps> = ({ onBookCall }) => {
       {/* Main Headline */}
       <div className="space-y-1 sm:space-y-2 mb-10">
         {/* Line 1: Hi, I'm [Avatar] Vaibhav Gupta! */}
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-4xl sm:text-5xl md:text-[54px] font-extrabold tracking-[-0.03em] text-[#111111] leading-tight min-h-[64px]">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-4xl sm:text-5xl md:text-[54px] font-extrabold tracking-[-0.03em] text-[#111111] dark:text-[#F4F4F2] leading-tight min-h-[64px]">
           
           {/* Morphing "Hi," that starts full-screen and glides to this exact location */}
           {isIntro ? (
@@ -44,7 +44,7 @@ export const Hero: React.FC<HeroProps> = ({ onBookCall }) => {
                   duration: 0.85,
                   ease: [0.16, 1, 0.3, 1], // Apple quintic deceleration
                 }}
-                className="text-7xl sm:text-8xl md:text-9xl font-extrabold tracking-[-0.04em] text-[#111111]"
+                className="text-7xl sm:text-8xl md:text-9xl font-extrabold tracking-[-0.04em] text-[#111111] dark:text-[#F4F4F2]"
               >
                 Hi,
               </motion.span>
@@ -76,7 +76,7 @@ export const Hero: React.FC<HeroProps> = ({ onBookCall }) => {
               whileTap={{ scale: 0.96 }}
               className="inline-flex items-center justify-center -translate-y-1 cursor-pointer"
             >
-              <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-[18px] sm:rounded-[22px] overflow-hidden border-2 border-white shadow-[0_8px_20px_rgba(0,0,0,0.12)] bg-[#1e1e1e] flex-shrink-0">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-[18px] sm:rounded-[22px] overflow-hidden border-2 border-white dark:border-white/20 shadow-[0_8px_20px_rgba(0,0,0,0.12)] bg-[#1e1e1e] flex-shrink-0">
                 <img 
                   src="/assets/vaibhav_avatar.jpg" 
                   alt="Vaibhav Gupta" 
@@ -99,9 +99,9 @@ export const Hero: React.FC<HeroProps> = ({ onBookCall }) => {
           transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
           className="text-4xl sm:text-5xl md:text-[54px] font-extrabold tracking-[-0.03em] leading-tight"
         >
-          <span className="text-[#A3A39E] font-medium mr-3">I’m a</span>
-          <span className="text-[#111111] font-extrabold mr-3">Software Engineer</span>
-          <span className="text-[#A3A39E] font-medium">building</span>
+          <span className="text-[#A3A39E] dark:text-[#7A7A75] font-medium mr-3">I’m a</span>
+          <span className="text-[#111111] dark:text-[#F4F4F2] font-extrabold mr-3">Software Engineer</span>
+          <span className="text-[#A3A39E] dark:text-[#7A7A75] font-medium">building</span>
         </motion.div>
 
         {/* Line 3: Full-Stack & AI Systems. + Open to work badge */}
@@ -116,7 +116,7 @@ export const Hero: React.FC<HeroProps> = ({ onBookCall }) => {
           </span>
 
           {/* Open to work pill */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EAEAE5] border border-[#DDDCD6] text-xs sm:text-[13px] font-semibold text-[#222222] shadow-[0_1px_3px_rgba(0,0,0,0.03)] select-none translate-y-0.5 sm:translate-y-1">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EAEAE5] dark:bg-white/[0.08] border border-[#DDDCD6] dark:border-white/10 text-xs sm:text-[13px] font-semibold text-[#222222] dark:text-[#E8E8E4] shadow-[0_1px_3px_rgba(0,0,0,0.03)] select-none translate-y-0.5 sm:translate-y-1">
             <span className="relative flex h-2 w-2 flex-shrink-0">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
@@ -137,13 +137,13 @@ export const Hero: React.FC<HeroProps> = ({ onBookCall }) => {
           onClick={onBookCall}
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
-          className="bg-[#111111] text-white px-7 py-3.5 rounded-full text-[15px] font-medium shadow-[0_4px_14px_rgba(0,0,0,0.18)] hover:bg-[#222222] hover:shadow-[0_6px_20px_rgba(0,0,0,0.22)] transition-all flex items-center justify-center flex-shrink-0 gap-2"
+          className="bg-[#111111] dark:bg-white text-white dark:text-[#111111] px-7 py-3.5 rounded-full text-[15px] font-medium shadow-[0_4px_14px_rgba(0,0,0,0.18)] hover:bg-[#222222] dark:hover:bg-[#EAEAE6] hover:shadow-[0_6px_20px_rgba(0,0,0,0.22)] transition-all flex items-center justify-center flex-shrink-0 gap-2 cursor-pointer"
         >
           <span>Send a message</span>
           <ArrowRight className="w-4 h-4" />
         </motion.button>
 
-        <p className="text-[15px] leading-relaxed text-[#444444] max-w-lg font-normal">
+        <p className="text-[15px] leading-relaxed text-[#444444] dark:text-[#A8A8A2] max-w-lg font-normal">
           Turning complex logic into fast, scalable, and beautifully engineered digital products. Feel free to explore my work below — I’d love to connect!
         </p>
       </motion.div>

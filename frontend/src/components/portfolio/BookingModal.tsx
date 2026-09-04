@@ -71,12 +71,12 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.94, y: 16 }}
             transition={{ type: 'spring', damping: 26, stiffness: 280 }}
-            className="relative bg-white/95 backdrop-blur-2xl rounded-[32px] p-7 sm:p-9 max-w-[480px] w-full shadow-[0_24px_70px_rgba(0,0,0,0.14),inset_0_1px_0_rgba(255,255,255,1)] border border-white/90 z-10 select-none overflow-hidden my-auto"
+            className="relative bg-white/95 dark:bg-[#181816]/95 backdrop-blur-2xl rounded-[32px] p-7 sm:p-9 max-w-[480px] w-full shadow-[0_24px_70px_rgba(0,0,0,0.14),inset_0_1px_0_rgba(255,255,255,1)] dark:shadow-[0_24px_70px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.08)] border border-white/90 dark:border-white/10 z-10 select-none overflow-hidden my-auto"
           >
             {/* Close Button */}
             <button
               onClick={handleResetAndClose}
-              className="absolute top-6 right-6 w-9 h-9 rounded-full bg-[#F3F3F0] hover:bg-[#EAEAE6] flex items-center justify-center text-neutral-500 hover:text-neutral-900 transition-colors focus:outline-none z-20 cursor-pointer"
+              className="absolute top-6 right-6 w-9 h-9 rounded-full bg-[#F3F3F0] dark:bg-[#222220] hover:bg-[#EAEAE6] dark:hover:bg-[#2C2C28] flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors focus:outline-none z-20 cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
@@ -85,10 +85,10 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
               <div>
                 {/* Header */}
                 <div className="mb-6 pr-8">
-                  <h3 className="text-2xl sm:text-[26px] font-extrabold text-[#111111] tracking-tight leading-tight">
+                  <h3 className="text-2xl sm:text-[26px] font-extrabold text-[#111111] dark:text-[#F4F4F2] tracking-tight leading-tight">
                     Let’s connect.
                   </h3>
-                  <p className="text-xs sm:text-[13px] text-[#7A7A75] mt-1.5 font-normal leading-relaxed">
+                  <p className="text-xs sm:text-[13px] text-[#7A7A75] dark:text-[#8E8E88] mt-1.5 font-normal leading-relaxed">
                     Have an engineering role, collaboration, or question? Send a message directly to my inbox.
                   </p>
                 </div>
@@ -96,7 +96,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
                 <form onSubmit={handleSubmit} className="space-y-4">
                   {/* Topic Pill Selector with Sliding Pill */}
                   <div className="space-y-1.5">
-                    <label className="text-[11.5px] font-semibold text-[#666660]">
+                    <label className="text-[11.5px] font-semibold text-[#666660] dark:text-[#A8A8A2]">
                       What’s this about?
                     </label>
                     <div className="flex flex-wrap gap-1.5">
@@ -109,14 +109,14 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
                             onClick={() => setActiveTopic(t)}
                             className={`relative px-3 py-1.5 rounded-full text-xs font-semibold transition-colors duration-200 focus:outline-none cursor-pointer ${
                               isSelected
-                                ? 'text-white'
-                                : 'text-[#555550] bg-[#F5F5F2] hover:bg-[#EBEBE6] border border-[#E8E8E3]'
+                                ? 'text-white dark:text-[#111111]'
+                                : 'text-[#555550] dark:text-[#C5C5BF] bg-[#F5F5F2] dark:bg-white/[0.06] hover:bg-[#EBEBE6] dark:hover:bg-white/[0.1] border border-[#E8E8E3] dark:border-white/10'
                             }`}
                           >
                             {isSelected && (
                               <motion.div
                                 layoutId="activeTopicPill"
-                                className="absolute inset-0 rounded-full bg-[#111111]"
+                                className="absolute inset-0 rounded-full bg-[#111111] dark:bg-white"
                                 transition={{ type: 'spring', stiffness: 450, damping: 35 }}
                               />
                             )}
@@ -129,7 +129,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
 
                   {/* Name Input */}
                   <div className="space-y-1.5 pt-1">
-                    <label className="text-[11.5px] font-semibold text-[#666660]">
+                    <label className="text-[11.5px] font-semibold text-[#666660] dark:text-[#A8A8A2]">
                       Your Name
                     </label>
                     <input
@@ -138,13 +138,13 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
                       placeholder="e.g. Alex Chi"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-2.5 rounded-2xl bg-[#F6F6F4] hover:bg-[#F2F2EF] focus:bg-white text-sm text-[#111111] placeholder:text-[#A0A09A] border border-transparent focus:border-[#111111] focus:outline-none transition-all"
+                      className="w-full px-4 py-2.5 rounded-2xl bg-[#F6F6F4] dark:bg-[#121210] hover:bg-[#F2F2EF] dark:hover:bg-[#1A1A18] focus:bg-white dark:focus:bg-[#121210] text-sm text-[#111111] dark:text-[#F4F4F2] placeholder:text-[#A0A09A] dark:placeholder:text-[#666660] border border-transparent dark:border-white/10 focus:border-[#111111] dark:focus:border-[#FF5A1F] focus:outline-none transition-all"
                     />
                   </div>
 
                   {/* Email Input */}
                   <div className="space-y-1.5">
-                    <label className="text-[11.5px] font-semibold text-[#666660]">
+                    <label className="text-[11.5px] font-semibold text-[#666660] dark:text-[#A8A8A2]">
                       Your Email
                     </label>
                     <input
@@ -153,13 +153,13 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
                       placeholder="alex@company.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-2.5 rounded-2xl bg-[#F6F6F4] hover:bg-[#F2F2EF] focus:bg-white text-sm text-[#111111] placeholder:text-[#A0A09A] border border-transparent focus:border-[#111111] focus:outline-none transition-all"
+                      className="w-full px-4 py-2.5 rounded-2xl bg-[#F6F6F4] dark:bg-[#121210] hover:bg-[#F2F2EF] dark:hover:bg-[#1A1A18] focus:bg-white dark:focus:bg-[#121210] text-sm text-[#111111] dark:text-[#F4F4F2] placeholder:text-[#A0A09A] dark:placeholder:text-[#666660] border border-transparent dark:border-white/10 focus:border-[#111111] dark:focus:border-[#FF5A1F] focus:outline-none transition-all"
                     />
                   </div>
 
                   {/* Message Input */}
                   <div className="space-y-1.5">
-                    <label className="text-[11.5px] font-semibold text-[#666660]">
+                    <label className="text-[11.5px] font-semibold text-[#666660] dark:text-[#A8A8A2]">
                       Message
                     </label>
                     <textarea
@@ -168,7 +168,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
                       placeholder="Hi Vaibhav, let’s discuss..."
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-4 py-2.5 rounded-2xl bg-[#F6F6F4] hover:bg-[#F2F2EF] focus:bg-white text-sm text-[#111111] placeholder:text-[#A0A09A] border border-transparent focus:border-[#111111] focus:outline-none transition-all resize-none"
+                      className="w-full px-4 py-2.5 rounded-2xl bg-[#F6F6F4] dark:bg-[#121210] hover:bg-[#F2F2EF] dark:hover:bg-[#1A1A18] focus:bg-white dark:focus:bg-[#121210] text-sm text-[#111111] dark:text-[#F4F4F2] placeholder:text-[#A0A09A] dark:placeholder:text-[#666660] border border-transparent dark:border-white/10 focus:border-[#111111] dark:focus:border-[#FF5A1F] focus:outline-none transition-all resize-none"
                     />
                   </div>
 
@@ -176,7 +176,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
                   <button
                     type="submit"
                     disabled={isSending}
-                    className="w-full py-3.5 px-6 rounded-full bg-[#111111] hover:bg-[#222222] text-white font-medium text-sm flex items-center justify-center gap-2 shadow-[0_4px_14px_rgba(0,0,0,0.16)] active:scale-[0.98] transition-all mt-3 disabled:opacity-75 cursor-pointer"
+                    className="w-full py-3.5 px-6 rounded-full bg-[#111111] dark:bg-white hover:bg-[#222222] dark:hover:bg-[#EAEAE6] text-white dark:text-[#111111] font-medium text-sm flex items-center justify-center gap-2 shadow-[0_4px_14px_rgba(0,0,0,0.16)] active:scale-[0.98] transition-all mt-3 disabled:opacity-75 cursor-pointer"
                   >
                     {isSending ? (
                       <>

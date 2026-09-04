@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ArrowUpRight } from 'lucide-react';
+import { X, ArrowUpRight, Sun, Moon } from 'lucide-react';
+import { useTheme } from '../../context/ThemeContext';
 
 interface NavDrawerProps {
   isOpen: boolean;
@@ -17,6 +18,8 @@ const navLinks = [
 ];
 
 export const NavDrawer: React.FC<NavDrawerProps> = ({ isOpen, onClose, onBookCall }) => {
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -27,7 +30,7 @@ export const NavDrawer: React.FC<NavDrawerProps> = ({ isOpen, onClose, onBookCal
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-black/25 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
           />
 
           {/* Drawer Panel */}
@@ -36,33 +39,49 @@ export const NavDrawer: React.FC<NavDrawerProps> = ({ isOpen, onClose, onBookCal
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 28, stiffness: 220 }}
-            className="absolute top-0 right-0 bottom-0 w-full max-w-sm bg-[#FAFAF8] p-7 sm:p-8 shadow-2xl flex flex-col justify-between border-l border-[#EBEBE6] z-10 overflow-y-auto"
+            className="absolute top-0 right-0 bottom-0 w-full max-w-sm bg-[#FAFAF8] dark:bg-[#141412] p-7 sm:p-8 shadow-2xl flex flex-col justify-between border-l border-[#EBEBE6] dark:border-white/10 z-10 overflow-y-auto"
           >
             {/* Top Section */}
             <div>
               {/* Header */}
-              <div className="flex items-center justify-between pb-5 border-b border-[#ECECE8]">
+              <div className="flex items-center justify-between pb-5 border-b border-[#ECECE8] dark:border-white/10">
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-[#111111] text-white flex items-center justify-center text-xs font-bold font-mono">
+                  <div className="w-9 h-9 rounded-full bg-[#111111] dark:bg-white text-white dark:text-[#111111] flex items-center justify-center text-xs font-bold font-mono">
                     VG
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-[#111111] leading-tight">Vaibhav Gupta</h4>
+                    <h4 className="text-sm font-bold text-[#111111] dark:text-[#F4F4F2] leading-tight">Vaibhav Gupta</h4>
                     <p className="text-[12px] text-[#8A8A85]">Software Engineer</p>
                   </div>
                 </div>
 
-                <button
-                  onClick={onClose}
-                  aria-label="Close navigation menu"
-                  className="w-9 h-9 rounded-full bg-white border border-[#E8E8E4] flex items-center justify-center text-neutral-600 hover:bg-neutral-100 transition-colors cursor-pointer"
-                >
-                  <X className="w-4 h-4" />
-                </button>
+                <div className="flex items-center gap-2">
+                  {/* Theme Switcher Button */}
+                  <button
+                    onClick={toggleTheme}
+                    aria-label="Toggle theme"
+                    className="w-9 h-9 rounded-full bg-white dark:bg-[#1E1E1B] border border-[#E8E8E4] dark:border-white/10 flex items-center justify-center text-[#111111] dark:text-[#F4F4F2] hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
+                    title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                  >
+                    {theme === 'dark' ? (
+                      <Sun className="w-4 h-4 text-amber-400" />
+                    ) : (
+                      <Moon className="w-4 h-4 text-[#555550]" />
+                    )}
+                  </button>
+
+                  <button
+                    onClick={onClose}
+                    aria-label="Close navigation menu"
+                    className="w-9 h-9 rounded-full bg-white dark:bg-[#1E1E1B] border border-[#E8E8E4] dark:border-white/10 flex items-center justify-center text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
 
               {/* Minimalist Live Status */}
-              <div className="flex items-center gap-2 text-xs font-medium text-[#444440] my-5 px-1">
+              <div className="flex items-center gap-2 text-xs font-medium text-[#444440] dark:text-[#A8A8A0] my-5 px-1">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span>Available for full-time & intern SDE roles</span>
               </div>
@@ -78,7 +97,7 @@ export const NavDrawer: React.FC<NavDrawerProps> = ({ isOpen, onClose, onBookCal
                     }}
                     target={link.external ? '_blank' : undefined}
                     rel={link.external ? 'noopener noreferrer' : undefined}
-                    className="group flex items-center justify-between py-3 px-3 rounded-xl hover:bg-white text-[#111111] hover:text-[#FF5A1F] transition-all border border-transparent hover:border-[#EAEAE6]"
+                    className="group flex items-center justify-between py-3 px-3 rounded-xl hover:bg-white dark:hover:bg-white/[0.06] text-[#111111] dark:text-[#EAEAE6] hover:text-[#FF5A1F] dark:hover:text-[#FF5A1F] transition-all border border-transparent hover:border-[#EAEAE6] dark:hover:border-white/10"
                   >
                     <div>
                       <div className="text-sm font-semibold leading-tight">{link.label}</div>
@@ -93,20 +112,20 @@ export const NavDrawer: React.FC<NavDrawerProps> = ({ isOpen, onClose, onBookCal
             </div>
 
             {/* Bottom Actions */}
-            <div className="pt-6 border-t border-[#ECECE8] space-y-3">
+            <div className="pt-6 border-t border-[#ECECE8] dark:border-white/10 space-y-3">
               <button
                 onClick={() => {
                   onClose();
                   onBookCall();
                 }}
-                className="w-full py-3 px-5 rounded-full bg-[#111111] hover:bg-neutral-800 text-white font-medium text-xs shadow-sm transition-all"
+                className="w-full py-3 px-4 rounded-xl bg-[#111111] dark:bg-white text-white dark:text-[#111111] font-medium text-xs hover:bg-[#FF5A1F] dark:hover:bg-[#FF5A1F] dark:hover:text-white transition-colors cursor-pointer shadow-sm"
               >
-                Send a Message
+                Book a 15-min Call
               </button>
-
-              <div className="flex items-center justify-between text-[11px] text-[#9A9A94] px-1">
-                <span>Noida, UP, India</span>
-                <span>vaibhav0878gupta@gmail.com</span>
+              
+              <div className="flex items-center justify-between text-[11px] text-[#8A8A85] px-1">
+                <span>Noida, UP • UTC+5:30</span>
+                <span className="text-[#111111] dark:text-[#F4F4F2] font-medium">Vaibhav Gupta</span>
               </div>
             </div>
           </motion.div>

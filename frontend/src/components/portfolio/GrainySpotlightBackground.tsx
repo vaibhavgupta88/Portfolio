@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { useTheme } from '../../context/ThemeContext';
 
 export const GrainySpotlightBackground: React.FC = () => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
   // Smooth spring-dampened mouse spotlight tracker
   const mouseX = useMotionValue(-1000);
   const mouseY = useMotionValue(-1000);
@@ -21,19 +25,21 @@ export const GrainySpotlightBackground: React.FC = () => {
   }, [mouseX, mouseY]);
 
   return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0 select-none">
+    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0 select-none transition-colors duration-300">
       {/* 1. Static Master Top Studio Spotlight (Gentle gallery overhead light) */}
       <div 
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[700px] pointer-events-none"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[700px] pointer-events-none transition-all duration-500"
         style={{
-          background: 'radial-gradient(ellipse 70% 60% at 50% 0%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 235, 220, 0.35) 45%, rgba(246, 246, 244, 0) 80%)',
+          background: isDark
+            ? 'radial-gradient(ellipse 70% 60% at 50% 0%, rgba(255, 90, 31, 0.10) 0%, rgba(30, 30, 26, 0.35) 45%, rgba(14, 14, 13, 0) 80%)'
+            : 'radial-gradient(ellipse 70% 60% at 50% 0%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 235, 220, 0.35) 45%, rgba(246, 246, 244, 0) 80%)',
         }}
       />
 
       {/* 2. Slow Breathing Ambient Aura in Header & Hero */}
       <motion.div
         animate={{
-          opacity: [0.35, 0.55, 0.35],
+          opacity: isDark ? [0.4, 0.7, 0.4] : [0.35, 0.55, 0.35],
           scale: [0.98, 1.03, 0.98],
         }}
         transition={{
@@ -43,7 +49,9 @@ export const GrainySpotlightBackground: React.FC = () => {
         }}
         className="absolute top-[-100px] left-1/2 -translate-x-1/2 w-[900px] h-[550px] rounded-full blur-[100px] pointer-events-none"
         style={{
-          background: 'radial-gradient(circle, rgba(255, 90, 31, 0.07) 0%, rgba(255, 180, 120, 0.03) 50%, transparent 75%)',
+          background: isDark
+            ? 'radial-gradient(circle, rgba(255, 90, 31, 0.12) 0%, rgba(255, 140, 80, 0.04) 50%, transparent 75%)'
+            : 'radial-gradient(circle, rgba(255, 90, 31, 0.07) 0%, rgba(255, 180, 120, 0.03) 50%, transparent 75%)',
         }}
       />
 
@@ -53,7 +61,9 @@ export const GrainySpotlightBackground: React.FC = () => {
         style={{
           x: smoothX,
           y: smoothY,
-          background: 'radial-gradient(circle, rgba(255, 255, 255, 0.75) 0%, rgba(255, 110, 50, 0.04) 40%, transparent 70%)',
+          background: isDark
+            ? 'radial-gradient(circle, rgba(255, 90, 31, 0.10) 0%, rgba(255, 255, 255, 0.02) 40%, transparent 70%)'
+            : 'radial-gradient(circle, rgba(255, 255, 255, 0.75) 0%, rgba(255, 110, 50, 0.04) 40%, transparent 70%)',
         }}
       />
 

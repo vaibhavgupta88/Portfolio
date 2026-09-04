@@ -47,7 +47,7 @@ export const App: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#F6F6F4] text-[#121212] flex flex-col items-center selection:bg-[#FF5A1F] selection:text-white antialiased font-sans relative overflow-x-hidden">
+    <div className="min-h-screen bg-[#F6F6F4] dark:bg-[#0E0E0D] text-[#121212] dark:text-[#F4F4F2] flex flex-col items-center selection:bg-[#FF5A1F] selection:text-white antialiased font-sans relative overflow-x-hidden transition-colors duration-300">
       {/* Global Animated Grainy Soft Spotlight Background */}
       <GrainySpotlightBackground />
 
@@ -117,17 +117,17 @@ export const App: React.FC = () => {
         {/* Footer */}
         <motion.footer 
           variants={itemVariants}
-          className="w-full max-w-5xl mx-auto px-4 py-6 text-center text-xs text-[#9E9E98] flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-[#ECECE8]/60 mt-auto"
+          className="w-full max-w-5xl mx-auto px-4 py-6 text-center text-xs text-[#9E9E98] dark:text-[#787872] flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-[#ECECE8]/60 dark:border-white/10 mt-auto"
         >
           <span>Crafted with precision • Vaibhav Gupta • Noida, UP</span>
           <div className="flex items-center gap-4">
-            <a href="https://www.linkedin.com/in/vaibhavgupta88/" target="_blank" rel="noreferrer" className="hover:text-[#111111] hover:underline underline-offset-4 transition">
+            <a href="https://www.linkedin.com/in/vaibhavgupta88/" target="_blank" rel="noreferrer" className="hover:text-[#111111] dark:hover:text-white hover:underline underline-offset-4 transition">
               LinkedIn
             </a>
-            <a href="https://github.com/vaibhavgupta88" target="_blank" rel="noreferrer" className="hover:text-[#111111] hover:underline underline-offset-4 transition">
+            <a href="https://github.com/vaibhavgupta88" target="_blank" rel="noreferrer" className="hover:text-[#111111] dark:hover:text-white hover:underline underline-offset-4 transition">
               GitHub
             </a>
-            <a href="https://leetcode.com/u/vaibhavgupta88/" target="_blank" rel="noreferrer" className="hover:text-[#111111] hover:underline underline-offset-4 transition">
+            <a href="https://leetcode.com/u/vaibhavgupta88/" target="_blank" rel="noreferrer" className="hover:text-[#111111] dark:hover:text-white hover:underline underline-offset-4 transition">
               LeetCode
             </a>
           </div>

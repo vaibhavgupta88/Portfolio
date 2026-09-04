@@ -41,11 +41,11 @@ export const ExperienceCard: React.FC = () => {
     <motion.div 
       whileHover={{ y: -3 }}
       transition={{ duration: 0.2 }}
-      className="bg-white/80 hover:bg-white/90 backdrop-blur-2xl rounded-[28px] p-6 sm:p-7 border border-white/70 shadow-[0_8px_32px_rgba(0,0,0,0.03),inset_0_1px_0_rgba(255,255,255,0.9)] hover:shadow-[0_14px_40px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,1)] flex flex-col justify-between h-full min-h-[340px] relative overflow-hidden group transition-all duration-300 select-none cursor-default"
+      className="bg-white/80 hover:bg-white/90 dark:bg-[#181816]/85 dark:hover:bg-[#20201D]/95 backdrop-blur-2xl rounded-[28px] p-6 sm:p-7 border border-white/70 dark:border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.03),inset_0_1px_0_rgba(255,255,255,0.9)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.08)] hover:shadow-[0_14px_40px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,1)] dark:hover:shadow-[0_14px_40px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.12)] flex flex-col justify-between h-full min-h-[340px] relative overflow-hidden group transition-all duration-300 select-none cursor-default"
     >
       {/* Top Header - Clean Unboxed Typography */}
       <div className="flex items-center justify-between mb-2">
-        <h3 className="text-xs font-bold text-[#8A8A85] uppercase tracking-wider">
+        <h3 className="text-xs font-bold text-[#8A8A85] dark:text-[#787872] uppercase tracking-wider">
           Featured Projects
         </h3>
         <a 
@@ -70,7 +70,7 @@ export const ExperienceCard: React.FC = () => {
                     href={proj.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-[15.5px] font-bold text-[#111111] group-hover/item:text-[#FF5A1F] transition-colors leading-tight"
+                    className="flex items-center gap-1.5 text-[15.5px] font-bold text-[#111111] dark:text-[#F4F4F2] group-hover/item:text-[#FF5A1F] dark:group-hover/item:text-[#FF5A1F] transition-colors leading-tight"
                   >
                     <span>{proj.name}</span>
                     <ArrowUpRight className="w-4 h-4 text-[#FF5A1F] transition-transform duration-200 group-hover/item:translate-x-0.5 group-hover/item:-translate-y-0.5" />
@@ -82,7 +82,7 @@ export const ExperienceCard: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/90 hover:bg-white text-[10.5px] font-medium text-[#555550] hover:text-[#111111] border border-[#E0E0DC] shadow-2xs transition-colors ml-1"
+                    className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/90 hover:bg-white dark:bg-white/[0.08] dark:hover:bg-white/[0.14] text-[10.5px] font-medium text-[#555550] hover:text-[#111111] dark:text-[#C5C5BF] dark:hover:text-white border border-[#E0E0DC] dark:border-white/10 shadow-2xs transition-colors ml-1"
                     title="View Source on GitHub"
                   >
                     <svg className="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24">
@@ -92,7 +92,7 @@ export const ExperienceCard: React.FC = () => {
                   </a>
                 </div>
 
-                <span className="text-[11px] font-medium text-[#7A7A75]">
+                <span className="text-[11px] font-medium text-[#7A7A75] dark:text-[#787872]">
                   {proj.period}
                 </span>
               </div>
@@ -103,18 +103,18 @@ export const ExperienceCard: React.FC = () => {
               </p>
 
               {/* Line 3: Description */}
-              <p className="text-[11.5px] text-[#555550] mt-0.5 leading-snug">
+              <p className="text-[11.5px] text-[#555550] dark:text-[#A4A49E] mt-0.5 leading-snug">
                 {proj.highlight}
               </p>
 
               {/* Line 4: Clean Non-Boxed Technologies List */}
-              <p className="text-[11px] font-medium text-[#8A8A85] mt-1 tracking-tight">
+              <p className="text-[11px] font-medium text-[#8A8A85] dark:text-[#787872] mt-1 tracking-tight">
                 {proj.tech.join(' • ')}
               </p>
             </div>
 
             {idx < projects.length - 1 && (
-              <div className="mt-3 border-b border-neutral-200/50" />
+              <div className="mt-3 border-b border-neutral-200/50 dark:border-white/10" />
             )}
           </div>
         ))}
