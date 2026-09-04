@@ -30,7 +30,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
     setIsSending(true);
     setErrorMessage(null);
 
-    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '';
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || 'd594e163-9545-4a75-b8ad-a2d3ea3ad28a';
 
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
