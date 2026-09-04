@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Lock, ExternalLink, Sparkles, Cpu } from 'lucide-react';
+import { ArrowUpRight, Lock, ExternalLink, Sparkles, Cpu, Play, Eye } from 'lucide-react';
 
 interface ShowcaseProject {
   id: string;
@@ -14,6 +14,7 @@ interface ShowcaseProject {
   liveUrl: string;
   githubUrl: string;
   displayUrl: string;
+  previewImage: string;
   icon: React.ReactNode;
 }
 
@@ -34,6 +35,7 @@ const showcaseProjects: ShowcaseProject[] = [
     liveUrl: 'https://aven-mu.vercel.app/',
     githubUrl: 'https://github.com/vaibhavgupta88/Aven',
     displayUrl: 'aven-mu.vercel.app',
+    previewImage: '/assets/projects/aven_preview.png',
     icon: <Sparkles className="w-4 h-4 text-[#FF5A1F]" />,
   },
   {
@@ -52,11 +54,19 @@ const showcaseProjects: ShowcaseProject[] = [
     liveUrl: 'https://seo-rank-tracker-nu.vercel.app/',
     githubUrl: 'https://github.com/vaibhavgupta88/SEO_rank_tracker',
     displayUrl: 'seo-rank-tracker-nu.vercel.app',
+    previewImage: '/assets/projects/rankpilot_preview.png',
     icon: <Cpu className="w-4 h-4 text-[#FF5A1F]" />,
   },
 ];
 
 export const ProjectShowcaseSection: React.FC = () => {
+  const [liveModes, setLiveModes] = useState<Record<string, boolean>>({});
+
+  const toggleLiveMode = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setLiveModes((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
+
   return (
     <section id="projects" className="px-2 sm:px-4 max-w-5xl mx-auto w-full pt-16 pb-12">
       {/* Section Header */}
@@ -81,6 +91,7 @@ export const ProjectShowcaseSection: React.FC = () => {
       <div className="space-y-20 sm:space-y-24">
         {showcaseProjects.map((project, idx) => {
           const isEven = idx % 2 === 0;
+          const isLive = !!liveModes[project.id];
 
           return (
             <div
@@ -108,51 +119,91 @@ export const ProjectShowcaseSection: React.FC = () => {
                     </div>
 
                     {/* Address Bar */}
-                    <div className="flex items-center gap-1.5 bg-white dark:bg-[#121210] px-3 py-1 rounded-full border border-[#E2E2DD] dark:border-white/10 text-[11px] font-mono text-[#555550] dark:text-[#A8A8A2] shadow-2xs max-w-[200px] sm:max-w-xs truncate">
+                    <div className="flex items-center gap-1.5 bg-white dark:bg-[#121210] px-3 py-1 rounded-full border border-[#E2E2DD] dark:border-white/10 text-[11px] font-mono text-[#555550] dark:text-[#A8A8A2] shadow-2xs max-w-[180px] sm:max-w-xs truncate">
                       <Lock className="w-3 h-3 text-[#27C93F] shrink-0" />
                       <span className="truncate">{project.displayUrl}</span>
                     </div>
 
-                    {/* Quick Launch Icon */}
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-1 rounded-md text-[#787873] dark:text-[#888882] hover:text-[#111111] dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/10 transition-colors"
-                      title="Open Live URL"
-                    >
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
+                    {/* Action Controls: Live Toggle & Quick Launch */}
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={(e) => toggleLiveMode(project.id, e)}
+                        className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10.5px] font-medium transition-all duration-200 cursor-pointer ${
+                          isLive
+                            ? 'bg-[#FF5A1F] text-white shadow-xs'
+                            : 'bg-white dark:bg-white/[0.08] hover:bg-neutral-100 dark:hover:bg-white/[0.14] text-[#555550] dark:text-[#C5C5BF] border border-[#E4E4DF] dark:border-white/10'
+                        }`}
+                        title={isLive ? 'Switch to smooth high-res preview' : 'Switch to live interactive iframe'}
+                      >
+                        {isLive ? (
+                          <>
+                            <Eye className="w-3 h-3 shrink-0" />
+                            <span>Preview</span>
+                          </>
+                        ) : (
+                          <>
+                            <Play className="w-3 h-3 shrink-0 fill-current" />
+                            <span>Live Mode</span>
+                          </>
+                        )}
+                      </button>
+
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-1 rounded-md text-[#787873] dark:text-[#888882] hover:text-[#111111] dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/10 transition-colors"
+                        title="Open Live URL in new tab"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
                   </div>
 
                   {/* Browser Window Viewport Content */}
-                  <div className="relative aspect-[16/10] sm:aspect-[16/10.5] w-full bg-[#FAFAF8] dark:bg-[#121210] overflow-hidden flex flex-col justify-between">
-                    {/* Live Embedded Interactive Iframe / Visual Mockup */}
-                    <div className="w-full h-full relative group/frame">
-                      <iframe
-                        src={project.liveUrl}
-                        title={`${project.title} Preview`}
-                        className="w-[calc(142%+28px)] h-[142%] transform scale-[0.704] origin-top-left border-0 bg-white pointer-events-auto transition-opacity"
-                        loading="lazy"
-                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                      />
-
-                      {/* Glassmorphic Hover Overlay with direct Launch CTA */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-end justify-between p-4 pointer-events-none">
-                        <span className="text-white text-xs font-medium backdrop-blur-md bg-black/50 px-3 py-1 rounded-full border border-white/20">
-                          {project.title} Live Deployment
-                        </span>
-                        <a
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FF5A1F] text-white text-xs font-semibold shadow-md pointer-events-auto hover:bg-[#E04F1B] transition-colors"
-                        >
-                          <span>Open Full App</span>
-                          <ArrowUpRight className="w-3.5 h-3.5" />
-                        </a>
+                  <div className="relative aspect-[16/10] sm:aspect-[16/10.5] w-full bg-[#FAFAF8] dark:bg-[#121210] overflow-hidden">
+                    {isLive ? (
+                      /* Live Interactive Iframe */
+                      <div className="w-full h-full relative">
+                        <iframe
+                          src={project.liveUrl}
+                          title={`${project.title} Live Preview`}
+                          className="w-full h-full border-0 bg-white dark:bg-[#121210]"
+                          loading="lazy"
+                          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                        />
                       </div>
-                    </div>
+                    ) : (
+                      /* Pixel-Perfect Desktop Preview with Buttery-Smooth Native Scrolling */
+                      <div 
+                        className="w-full h-full overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden overscroll-contain select-none relative group/viewport"
+                      >
+                        <img
+                          src={project.previewImage}
+                          alt={`${project.title} Desktop View`}
+                          className="w-full h-auto block select-none pointer-events-none"
+                          loading="lazy"
+                        />
+
+                        {/* Glassmorphic Hover Overlay with Launch CTA and Scroll Hint */}
+                        <div className="absolute inset-x-0 bottom-0 p-3.5 bg-gradient-to-t from-black/80 via-black/35 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-between text-white pointer-events-none">
+                          <span className="text-[11px] font-medium backdrop-blur-md bg-black/60 px-3 py-1 rounded-full border border-white/15 flex items-center gap-1.5 shadow-sm">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                            <span>Scroll to explore full site</span>
+                          </span>
+
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FF5A1F] text-white text-[11.5px] font-semibold shadow-md pointer-events-auto hover:bg-[#E04F1B] transition-colors"
+                          >
+                            <span>Open Full App</span>
+                            <ArrowUpRight className="w-3.5 h-3.5" />
+                          </a>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </motion.div>
