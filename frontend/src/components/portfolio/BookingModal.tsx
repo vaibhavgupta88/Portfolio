@@ -193,11 +193,11 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
                 </form>
 
                 {/* Subtle Direct Contact Bottom Note */}
-                <div className="mt-5 text-center text-[11.5px] text-[#9A9A94]">
+                <div className="mt-5 text-center text-[11.5px] text-[#9A9A94] dark:text-[#8E8E88]">
                   Or email directly at{' '}
                   <a
                     href="mailto:vaibhav0878gupta@gmail.com"
-                    className="text-[#111111] font-semibold hover:underline"
+                    className="text-[#111111] dark:text-[#F4F4F2] font-semibold hover:underline hover:text-[#FF5A1F] dark:hover:text-[#FF5A1F] transition-colors"
                   >
                     vaibhav0878gupta@gmail.com
                   </a>
@@ -223,25 +223,25 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
 
                 {/* Heading & Context */}
                 <div className="space-y-1.5">
-                  <h3 className="text-2xl font-extrabold text-[#111111] tracking-tight">
+                  <h3 className="text-2xl font-extrabold text-[#111111] dark:text-[#F4F4F2] tracking-tight">
                     Message Sent!
                   </h3>
-                  <p className="text-xs sm:text-[13px] text-[#73736E] max-w-xs mx-auto leading-relaxed">
-                    Thank you, <span className="font-semibold text-[#111111]">{formData.name || 'there'}</span>. I’ve received your note regarding <span className="font-semibold text-[#111111]">{activeTopic}</span> and will get back to you shortly.
+                  <p className="text-xs sm:text-[13px] text-[#73736E] dark:text-[#A8A8A2] max-w-xs mx-auto leading-relaxed">
+                    Thank you, <span className="font-semibold text-[#111111] dark:text-[#F4F4F2]">{formData.name || 'there'}</span>. I’ve received your note regarding <span className="font-semibold text-[#111111] dark:text-[#F4F4F2]">{activeTopic}</span> and will get back to you shortly.
                   </p>
                 </div>
 
                 {/* Confirmation Receipt Capsule */}
-                <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#F6F6F4] border border-[#E8E8E3] text-xs text-[#555550]">
+                <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#F6F6F4] dark:bg-white/[0.06] border border-[#E8E8E3] dark:border-white/10 text-xs text-[#555550] dark:text-[#C5C5BF]">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>Delivered to: <strong className="text-[#111111]">vaibhav0878gupta@gmail.com</strong></span>
+                  <span>Delivered to: <strong className="text-[#111111] dark:text-[#F4F4F2]">vaibhav0878gupta@gmail.com</strong></span>
                 </div>
 
                 {/* Back to Portfolio Button */}
                 <div className="pt-2">
                   <button
                     onClick={handleResetAndClose}
-                    className="w-full py-3.5 px-6 rounded-full bg-[#111111] hover:bg-[#222222] text-white text-xs font-semibold shadow-sm transition-all duration-200 cursor-pointer"
+                    className="w-full py-3.5 px-6 rounded-full bg-[#111111] dark:bg-white hover:bg-[#222222] dark:hover:bg-[#EAEAE6] text-white dark:text-[#111111] text-xs font-semibold shadow-sm transition-all duration-200 cursor-pointer"
                   >
                     Back to Portfolio
                   </button>
