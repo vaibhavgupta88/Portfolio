@@ -7,6 +7,7 @@ import { LeadershipCard } from './components/portfolio/LeadershipCard';
 import { EducationCard } from './components/portfolio/EducationCard';
 import { ReadingCard } from './components/portfolio/ReadingCard';
 import { MapCard } from './components/portfolio/MapCard';
+import { ProjectShowcaseSection } from './components/portfolio/ProjectShowcaseSection';
 import { TechnicalSkillsSection } from './components/portfolio/TechnicalSkillsSection';
 import { GrainySpotlightBackground } from './components/portfolio/GrainySpotlightBackground';
 import { BookingModal } from './components/portfolio/BookingModal';
@@ -101,6 +102,11 @@ export const App: React.FC = () => {
 
             </div>
           </motion.section>
+
+          {/* Detailed Alternating Project Showcase Section */}
+          <motion.div variants={itemVariants}>
+            <ProjectShowcaseSection />
+          </motion.div>
 
           {/* Dedicated Technical Skills Section */}
           <motion.div variants={itemVariants}>

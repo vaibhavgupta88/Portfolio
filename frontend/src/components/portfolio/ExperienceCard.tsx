@@ -58,9 +58,13 @@ export const ExperienceCard: React.FC = () => {
         <h3 className="text-xs font-bold text-[#8A8A85] uppercase tracking-wider">
           Featured Projects
         </h3>
-        <span className="text-[11px] font-medium text-[#A0A09A]">
-          Flagship Works
-        </span>
+        <a 
+          href="#projects" 
+          className="text-[11px] font-medium text-[#FF5A1F] hover:underline flex items-center gap-0.5 transition-colors cursor-pointer"
+        >
+          <span>Case Studies</span>
+          <span>↓</span>
+        </a>
       </div>
 
       {/* Clean Divided Project List */}
