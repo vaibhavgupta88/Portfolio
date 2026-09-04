@@ -22,9 +22,14 @@ export const MapCard: React.FC = () => {
       doubleClickZoom: false,
     });
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    const cartoKey = (import.meta.env.VITE_CARTO_API_KEY as string | undefined)?.trim();
+    const tileUrl = cartoKey
+      ? `https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=${cartoKey}`
+      : 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+
+    L.tileLayer(tileUrl, {
       maxZoom: 19,
-      subdomains: 'abcd',
+      subdomains: cartoKey ? 'abcd' : 'abc',
     }).addTo(map);
 
     // Custom Minimal Pulse Marker at Noida Coordinates
@@ -64,7 +69,7 @@ export const MapCard: React.FC = () => {
 
       {/* Top Map Section (Real Draggable Leaflet Map) */}
       <div className="relative w-full h-[62%] overflow-hidden">
-        <div ref={mapContainerRef} className="w-full h-full grayscale contrast-[1.05] brightness-95" />
+        <div ref={mapContainerRef} className="w-full h-full grayscale contrast-[1.1] brightness-[1.02] opacity-90" />
 
         {/* Bottom Fade Mask into Pure White */}
         <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white via-white/85 to-transparent z-10 pointer-events-none" />
