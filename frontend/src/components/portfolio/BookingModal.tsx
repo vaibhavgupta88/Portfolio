@@ -74,13 +74,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
     onClose();
   };
 
-  // Lock body scrolling when modal is open and restore on close
+  // Ensure body scroll is always free and never trapped
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
+    document.body.style.overflow = '';
     return () => {
       document.body.style.overflow = '';
     };

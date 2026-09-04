@@ -20,13 +20,9 @@ const navLinks = [
 export const NavDrawer: React.FC<NavDrawerProps> = ({ isOpen, onClose, onBookCall }) => {
   const { theme, toggleTheme } = useTheme();
 
-  // Lock body scrolling when drawer is open and restore on close
+  // Ensure body scroll is always free and never trapped
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
+    document.body.style.overflow = '';
     return () => {
       document.body.style.overflow = '';
     };
