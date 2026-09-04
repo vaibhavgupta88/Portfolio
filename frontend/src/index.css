@@ -47,3 +47,15 @@
 * {
   -webkit-tap-highlight-color: transparent;
 }
+
+/* Hide scrollbars completely on embedded preview iframes */
+iframe {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+iframe::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+

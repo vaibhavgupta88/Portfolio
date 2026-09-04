@@ -132,7 +132,8 @@ export const ProjectShowcaseSection: React.FC = () => {
                       <iframe
                         src={project.liveUrl}
                         title={`${project.title} Preview`}
-                        className="w-[142%] h-[142%] transform scale-[0.704] origin-top-left border-0 bg-white pointer-events-none group-hover/frame:pointer-events-auto transition-opacity"
+                        scrolling="no"
+                        className="w-[142%] h-[142%] transform scale-[0.704] origin-top-left border-0 bg-white pointer-events-none group-hover/frame:pointer-events-auto transition-opacity [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden overflow-hidden"
                         loading="lazy"
                         sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
                       />
