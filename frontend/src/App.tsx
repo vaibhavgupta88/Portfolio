@@ -75,12 +75,12 @@ export const App: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
               
               {/* Row 1: Featured Projects (Wide 2-Column Widget) */}
-              <motion.div variants={itemVariants} className="col-span-1 md:col-span-2">
+              <motion.div variants={itemVariants} className="col-span-1 md:col-span-2 h-full">
                 <ExperienceCard />
               </motion.div>
 
               {/* Row 1: Montreal/Noida Style Map (1-Column Square Widget) */}
-              <motion.div variants={itemVariants} className="col-span-1">
+              <motion.div variants={itemVariants} className="col-span-1 h-full">
                 <MapCard />
               </motion.div>
 

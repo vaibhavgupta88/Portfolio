@@ -53,7 +53,7 @@ export const MapCard: React.FC = () => {
     <motion.div 
       whileHover={{ y: -3 }}
       transition={{ duration: 0.2 }}
-      className="bg-white/80 hover:bg-white/90 backdrop-blur-2xl rounded-[28px] border border-white/70 shadow-[0_8px_32px_rgba(0,0,0,0.03),inset_0_1px_0_rgba(255,255,255,0.9)] hover:shadow-[0_14px_40px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,1)] flex flex-col justify-between h-[340px] relative overflow-hidden group transition-all duration-300 select-none cursor-default"
+      className="bg-white/80 hover:bg-white/90 backdrop-blur-2xl rounded-[28px] border border-white/70 shadow-[0_8px_32px_rgba(0,0,0,0.03),inset_0_1px_0_rgba(255,255,255,0.9)] hover:shadow-[0_14px_40px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,1)] flex flex-col justify-between h-full min-h-[340px] relative overflow-hidden group transition-all duration-300 select-none cursor-default"
     >
       {/* Top Left Clean Unboxed "Map" Heading */}
       <div className="absolute top-6 left-6 z-20">

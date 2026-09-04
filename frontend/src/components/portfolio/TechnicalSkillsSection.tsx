@@ -43,6 +43,7 @@ const skillGroups: SkillGroup[] = [
     skills: [
       { name: 'Node.js', highlight: true },
       { name: 'Express.js', highlight: true },
+      { name: 'PostgreSQL', highlight: true },
       { name: 'MongoDB', highlight: true },
       { name: 'MySQL' },
       { name: 'RESTful Architecture' },
@@ -58,6 +59,8 @@ const skillGroups: SkillGroup[] = [
       { name: 'Browserbase', highlight: true },
       { name: 'Git & GitHub' },
       { name: 'Postman' },
+      { name: 'Clerk Auth' },
+      { name: 'Stripe' },
       { name: 'Vite' },
     ],
   },

@@ -15,6 +15,16 @@ interface Project {
 
 const projects: Project[] = [
   {
+    id: 'aven',
+    name: 'Aven AI',
+    category: 'Full-Stack AI Content Generation SaaS',
+    period: '2026',
+    highlight: 'Full-stack AI content generation SaaS supporting article, image, resume-analysis, and image-editing workflows.',
+    tech: ['React 19', 'Express 5', 'PostgreSQL', 'Gemini AI', 'Clerk', 'Stripe'],
+    liveUrl: 'https://aven-mu.vercel.app/',
+    githubUrl: 'https://github.com/vaibhavgupta88/Aven',
+  },
+  {
     id: 'rankpilot',
     name: 'Rank Pilot',
     category: 'AI SEO Tracking Engine',
@@ -41,7 +51,7 @@ export const ExperienceCard: React.FC = () => {
     <motion.div 
       whileHover={{ y: -3 }}
       transition={{ duration: 0.2 }}
-      className="bg-white/80 hover:bg-white/90 backdrop-blur-2xl rounded-[28px] p-6 sm:p-7 border border-white/70 shadow-[0_8px_32px_rgba(0,0,0,0.03),inset_0_1px_0_rgba(255,255,255,0.9)] hover:shadow-[0_14px_40px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,1)] flex flex-col justify-between h-[340px] relative overflow-hidden group transition-all duration-300 select-none cursor-default"
+      className="bg-white/80 hover:bg-white/90 backdrop-blur-2xl rounded-[28px] p-6 sm:p-7 border border-white/70 shadow-[0_8px_32px_rgba(0,0,0,0.03),inset_0_1px_0_rgba(255,255,255,0.9)] hover:shadow-[0_14px_40px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,1)] flex flex-col justify-between h-full min-h-[340px] relative overflow-hidden group transition-all duration-300 select-none cursor-default"
     >
       {/* Top Header - Clean Unboxed Typography */}
       <div className="flex items-center justify-between mb-2">
@@ -54,7 +64,7 @@ export const ExperienceCard: React.FC = () => {
       </div>
 
       {/* Clean Divided Project List */}
-      <div className="space-y-4 my-auto">
+      <div className="space-y-3.5 my-auto">
         {projects.map((proj, idx) => (
           <div key={proj.id} className="group/item cursor-default">
             <div className="transition-transform duration-200 group-hover/item:translate-x-1">
@@ -109,8 +119,8 @@ export const ExperienceCard: React.FC = () => {
               </p>
             </div>
 
-            {idx === 0 && (
-              <div className="mt-3.5 border-b border-neutral-200/50" />
+            {idx < projects.length - 1 && (
+              <div className="mt-3 border-b border-neutral-200/50" />
             )}
           </div>
         ))}
