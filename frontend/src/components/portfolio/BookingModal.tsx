@@ -18,6 +18,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
   const [activeTopic, setActiveTopic] = useState('SDE Role / Job');
   const [isSending, setIsSending] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -27,27 +28,48 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSending(true);
+    setErrorMessage(null);
 
-    const subject = encodeURIComponent(`[Portfolio Contact: ${activeTopic}] From ${formData.name}`);
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\nTopic: ${activeTopic}\n\nMessage:\n${formData.message}`
-    );
-    const mailtoUrl = `mailto:vaibhav0878gupta@gmail.com?subject=${subject}&body=${body}`;
-
-    await new Promise((res) => setTimeout(res, 500));
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '';
 
     try {
-      window.open(mailtoUrl, '_blank');
-    } catch {
-      // Fallback
-    }
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          name: formData.name,
+          email: formData.email,
+          topic: activeTopic,
+          subject: `[Portfolio Contact: ${activeTopic}] From ${formData.name}`,
+          message: formData.message,
+          from_name: `${formData.name} (Portfolio)`,
+        }),
+      });
 
-    setIsSending(false);
-    setSubmitted(true);
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitted(true);
+      } else {
+        // If key is missing or invalid, display helpful message
+        setErrorMessage(
+          data.message || 'Failed to deliver message directly. Please configure your Web3Forms Access Key.'
+        );
+      }
+    } catch {
+      setErrorMessage('Network error occurred. Please check your connection and try again.');
+    } finally {
+      setIsSending(false);
+    }
   };
 
   const handleResetAndClose = () => {
     setSubmitted(false);
+    setErrorMessage(null);
     setFormData({ name: '', email: '', message: '' });
     onClose();
   };
@@ -171,6 +193,13 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
                       className="w-full px-4 py-2.5 rounded-2xl bg-[#F6F6F4] dark:bg-[#121210] hover:bg-[#F2F2EF] dark:hover:bg-[#1A1A18] focus:bg-white dark:focus:bg-[#121210] text-sm text-[#111111] dark:text-[#F4F4F2] placeholder:text-[#A0A09A] dark:placeholder:text-[#666660] border border-transparent dark:border-white/10 focus:border-[#111111] dark:focus:border-[#FF5A1F] focus:outline-none transition-all resize-none"
                     />
                   </div>
+
+                  {/* Error Notification */}
+                  {errorMessage && (
+                    <div className="p-3 rounded-2xl bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 text-xs text-red-600 dark:text-red-400">
+                      <p className="font-medium">{errorMessage}</p>
+                    </div>
+                  )}
 
                   {/* Submit Button */}
                   <button
