@@ -86,36 +86,47 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
     };
   }, [isOpen]);
 
+  // Automatically close modal 2.5s after successful submission so user isn't blocked
+  useEffect(() => {
+    if (submitted) {
+      const timer = setTimeout(() => {
+        handleResetAndClose();
+      }, 2500);
+      return () => clearTimeout(timer);
+    }
+  }, [submitted]);
+
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
-          key="booking-modal-overlay"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
+        <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
+          onClick={handleResetAndClose}
         >
-          {/* Backdrop */}
-          <div
-            onClick={handleResetAndClose}
-            className="fixed inset-0 bg-black/35 backdrop-blur-md"
+          {/* Animated Backdrop */}
+          <motion.div
+            key="booking-modal-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm -z-10 cursor-pointer"
           />
 
           {/* Modal Container */}
           <motion.div
-            key="booking-modal-content"
+            key="booking-modal-card"
             initial={{ opacity: 0, scale: 0.94, y: 16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.94, y: 16 }}
             transition={{ type: 'spring', damping: 26, stiffness: 280 }}
-            className="relative bg-white/95 dark:bg-[#181816]/95 backdrop-blur-2xl rounded-[32px] p-7 sm:p-9 max-w-[480px] w-full shadow-[0_24px_70px_rgba(0,0,0,0.14),inset_0_1px_0_rgba(255,255,255,1)] dark:shadow-[0_24px_70px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.08)] border border-white/90 dark:border-white/10 z-10 select-none overflow-hidden my-auto"
+            onClick={(e) => e.stopPropagation()}
+            className="relative bg-white/95 dark:bg-[#181816]/95 backdrop-blur-2xl rounded-[32px] p-7 sm:p-9 max-w-[480px] w-full shadow-[0_24px_70px_rgba(0,0,0,0.14),inset_0_1px_0_rgba(255,255,255,1)] dark:shadow-[0_24px_70px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.08)] border border-white/90 dark:border-white/10 z-20 select-none overflow-hidden my-auto"
           >
             {/* Close Button */}
             <button
               onClick={handleResetAndClose}
-              className="absolute top-6 right-6 w-9 h-9 rounded-full bg-[#F3F3F0] dark:bg-[#222220] hover:bg-[#EAEAE6] dark:hover:bg-[#2C2C28] flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors focus:outline-none z-20 cursor-pointer"
+              className="absolute top-6 right-6 w-9 h-9 rounded-full bg-[#F3F3F0] dark:bg-[#222220] hover:bg-[#EAEAE6] dark:hover:bg-[#2C2C28] flex items-center justify-center text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors focus:outline-none z-30 cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
@@ -295,7 +306,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
               </motion.div>
             )}
           </motion.div>
-        </motion.div>
+        </div>
       )}
     </AnimatePresence>
   );

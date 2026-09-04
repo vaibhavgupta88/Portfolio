@@ -144,6 +144,7 @@ export const App: React.FC = () => {
         isOpen={isMenuOpen}
         onClose={() => setIsMenuOpen(false)}
         onBookCall={() => {
+          setIsMenuOpen(false);
           setIsBookingOpen(true);
         }}
       />

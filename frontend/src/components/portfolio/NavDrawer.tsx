@@ -35,18 +35,18 @@ export const NavDrawer: React.FC<NavDrawerProps> = ({ isOpen, onClose, onBookCal
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
-          key="nav-drawer-overlay"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
+        <div
           className="fixed inset-0 z-50 overflow-hidden"
+          onClick={onClose}
         >
           {/* Backdrop */}
-          <div
-            onClick={onClose}
-            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+          <motion.div
+            key="nav-drawer-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="absolute inset-0 bg-black/40 backdrop-blur-sm -z-10"
           />
 
           {/* Drawer Panel */}
@@ -56,7 +56,8 @@ export const NavDrawer: React.FC<NavDrawerProps> = ({ isOpen, onClose, onBookCal
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 28, stiffness: 220 }}
-            className="absolute top-0 right-0 bottom-0 w-full max-w-sm bg-[#FAFAF8] dark:bg-[#141412] p-7 sm:p-8 shadow-2xl flex flex-col justify-between border-l border-[#EBEBE6] dark:border-white/10 z-10 overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+            className="absolute top-0 right-0 bottom-0 w-full max-w-sm bg-[#FAFAF8] dark:bg-[#141412] p-7 sm:p-8 shadow-2xl flex flex-col justify-between border-l border-[#EBEBE6] dark:border-white/10 z-20 overflow-y-auto"
           >
             {/* Top Section */}
             <div>
@@ -146,7 +147,7 @@ export const NavDrawer: React.FC<NavDrawerProps> = ({ isOpen, onClose, onBookCal
               </div>
             </div>
           </motion.div>
-        </motion.div>
+        </div>
       )}
     </AnimatePresence>
   );
