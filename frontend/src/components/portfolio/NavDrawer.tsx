@@ -20,6 +20,17 @@ const navLinks = [
 export const NavDrawer: React.FC<NavDrawerProps> = ({ isOpen, onClose, onBookCall }) => {
   const { theme, toggleTheme } = useTheme();
 
+  // Keyboard shortcut: close drawer on Escape
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   // Ensure body scroll is always free and never trapped
   useEffect(() => {
     document.body.style.overflow = '';
@@ -31,29 +42,24 @@ export const NavDrawer: React.FC<NavDrawerProps> = ({ isOpen, onClose, onBookCal
   return (
     <AnimatePresence>
       {isOpen && (
-        <div
-          className="fixed inset-0 z-50 overflow-hidden"
+        <motion.div
+          key="nav-drawer-overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0, pointerEvents: 'none' }}
+          transition={{ duration: 0.2 }}
+          className="fixed inset-0 z-50 overflow-hidden bg-black/40 backdrop-blur-sm cursor-pointer pointer-events-auto"
           onClick={onClose}
         >
-          {/* Backdrop */}
-          <motion.div
-            key="nav-drawer-backdrop"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="absolute inset-0 bg-black/40 backdrop-blur-sm -z-10"
-          />
-
           {/* Drawer Panel */}
           <motion.div
             key="nav-drawer-panel"
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
-            exit={{ x: '100%' }}
+            exit={{ x: '100%', pointerEvents: 'none' }}
             transition={{ type: 'spring', damping: 28, stiffness: 220 }}
             onClick={(e) => e.stopPropagation()}
-            className="absolute top-0 right-0 bottom-0 w-full max-w-sm bg-[#FAFAF8] dark:bg-[#141412] p-7 sm:p-8 shadow-2xl flex flex-col justify-between border-l border-[#EBEBE6] dark:border-white/10 z-20 overflow-y-auto"
+            className="absolute top-0 right-0 bottom-0 w-full max-w-sm bg-[#FAFAF8] dark:bg-[#141412] p-7 sm:p-8 shadow-2xl flex flex-col justify-between border-l border-[#EBEBE6] dark:border-white/10 z-20 overflow-y-auto cursor-default pointer-events-auto"
           >
             {/* Top Section */}
             <div>
@@ -143,7 +149,7 @@ export const NavDrawer: React.FC<NavDrawerProps> = ({ isOpen, onClose, onBookCal
               </div>
             </div>
           </motion.div>
-        </div>
+        </motion.div>
       )}
     </AnimatePresence>
   );

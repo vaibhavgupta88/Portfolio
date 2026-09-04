@@ -33,21 +33,21 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
     const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || 'd594e163-9545-4a75-b8ad-a2d3ea3ad28a';
 
     try {
+      const submissionData = new FormData();
+      submissionData.append('access_key', accessKey);
+      submissionData.append('name', formData.name);
+      submissionData.append('email', formData.email);
+      submissionData.append('topic', activeTopic);
+      submissionData.append('subject', `[Portfolio Contact: ${activeTopic}] From ${formData.name}`);
+      submissionData.append('message', formData.message);
+      submissionData.append('from_name', `${formData.name} (Portfolio)`);
+
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           Accept: 'application/json',
         },
-        body: JSON.stringify({
-          access_key: accessKey,
-          name: formData.name,
-          email: formData.email,
-          topic: activeTopic,
-          subject: `[Portfolio Contact: ${activeTopic}] From ${formData.name}`,
-          message: formData.message,
-          from_name: `${formData.name} (Portfolio)`,
-        }),
+        body: submissionData,
       });
 
       const data = await response.json();
@@ -55,24 +55,29 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
       if (data.success) {
         setSubmitted(true);
       } else {
-        // If key is missing or invalid, display helpful message
-        setErrorMessage(
-          data.message || 'Failed to deliver message directly. Please configure your Web3Forms Access Key.'
-        );
+        setErrorMessage(data.message || 'Direct submission could not be completed. Please check your details or email directly.');
       }
     } catch {
-      setErrorMessage('Network error occurred. Please check your connection and try again.');
+      setErrorMessage('Network or security blocker prevented message submission. Please reach out directly at vaibhav0878gupta@gmail.com.');
     } finally {
       setIsSending(false);
     }
   };
 
   const handleResetAndClose = () => {
-    setSubmitted(false);
-    setErrorMessage(null);
-    setFormData({ name: '', email: '', message: '' });
     onClose();
   };
+
+  // Keyboard shortcut: close modal on Escape
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
 
   // Ensure body scroll is always free and never trapped
   useEffect(() => {
@@ -84,40 +89,41 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
 
   // Automatically close modal 2.5s after successful submission so user isn't blocked
   useEffect(() => {
-    if (submitted) {
+    if (submitted && isOpen) {
       const timer = setTimeout(() => {
-        handleResetAndClose();
+        onClose();
       }, 2500);
       return () => clearTimeout(timer);
     }
-  }, [submitted]);
+  }, [submitted, isOpen, onClose]);
 
   return (
-    <AnimatePresence>
+    <AnimatePresence
+      onExitComplete={() => {
+        setSubmitted(false);
+        setErrorMessage(null);
+        setFormData({ name: '', email: '', message: '' });
+      }}
+    >
       {isOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
+        <motion.div
+          key="booking-modal-overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0, pointerEvents: 'none' }}
+          transition={{ duration: 0.2 }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-black/40 backdrop-blur-sm cursor-pointer pointer-events-auto"
           onClick={handleResetAndClose}
         >
-          {/* Animated Backdrop */}
-          <motion.div
-            key="booking-modal-backdrop"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-black/40 backdrop-blur-sm -z-10 cursor-pointer"
-          />
-
           {/* Modal Container */}
           <motion.div
             key="booking-modal-card"
             initial={{ opacity: 0, scale: 0.94, y: 16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.94, y: 16 }}
+            exit={{ opacity: 0, scale: 0.94, y: 16, pointerEvents: 'none' }}
             transition={{ type: 'spring', damping: 26, stiffness: 280 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative bg-white/95 dark:bg-[#181816]/95 backdrop-blur-2xl rounded-[32px] p-7 sm:p-9 max-w-[480px] w-full shadow-[0_24px_70px_rgba(0,0,0,0.14),inset_0_1px_0_rgba(255,255,255,1)] dark:shadow-[0_24px_70px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.08)] border border-white/90 dark:border-white/10 z-20 select-none overflow-hidden my-auto"
+            className="relative bg-white/95 dark:bg-[#181816]/95 backdrop-blur-2xl rounded-[32px] p-7 sm:p-9 max-w-[480px] w-full shadow-[0_24px_70px_rgba(0,0,0,0.14),inset_0_1px_0_rgba(255,255,255,1)] dark:shadow-[0_24px_70px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.08)] border border-white/90 dark:border-white/10 z-20 select-none overflow-hidden my-auto cursor-default pointer-events-auto"
           >
             {/* Close Button */}
             <button
@@ -302,7 +308,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
               </motion.div>
             )}
           </motion.div>
-        </div>
+        </motion.div>
       )}
     </AnimatePresence>
   );
