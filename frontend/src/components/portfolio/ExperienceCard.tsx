@@ -34,16 +34,6 @@ const projects: Project[] = [
     liveUrl: 'https://seo-rank-tracker-nu.vercel.app/',
     githubUrl: 'https://github.com/vaibhavgupta88/SEO_rank_tracker',
   },
-  {
-    id: 'jeevansetu',
-    name: 'JeevanSetu',
-    category: 'Disaster Preparedness Platform • SIH 2025',
-    period: '2025',
-    highlight: 'Real-time disaster response system for schools with interactive maps, emergency alerts, and AI assistance.',
-    tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Maps API'],
-    liveUrl: 'https://github.com/vaibhavgupta88',
-    githubUrl: 'https://github.com/vaibhavgupta88',
-  },
 ];
 
 export const ExperienceCard: React.FC = () => {

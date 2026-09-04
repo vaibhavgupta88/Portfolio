@@ -11,7 +11,6 @@ interface NavDrawerProps {
 const navLinks = [
   { label: 'Aven AI', sublabel: 'AI Content Generation SaaS (2026)', href: 'https://aven-mu.vercel.app/', external: true },
   { label: 'Rank Pilot', sublabel: 'AI SEO Tracking Engine (2026)', href: 'https://seo-rank-tracker-nu.vercel.app/', external: true },
-  { label: 'JeevanSetu', sublabel: 'Disaster Prep Platform (SIH 2025)', href: 'https://github.com/vaibhavgupta88', external: true },
   { label: 'LeetCode', sublabel: '200+ Problems Solved in C++', href: 'https://leetcode.com/u/vaibhavgupta88/', external: true },
   { label: 'GitHub', sublabel: 'Open Source Repositories', href: 'https://github.com/vaibhavgupta88', external: true },
   { label: 'LinkedIn', sublabel: 'Connect & Work History', href: 'https://www.linkedin.com/in/vaibhavgupta88/', external: true },

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Lock, ExternalLink, Sparkles, Shield, Cpu, Layers } from 'lucide-react';
+import { ArrowUpRight, Lock, ExternalLink, Sparkles, Cpu } from 'lucide-react';
 
 interface ShowcaseProject {
   id: string;
@@ -15,7 +15,6 @@ interface ShowcaseProject {
   githubUrl: string;
   displayUrl: string;
   icon: React.ReactNode;
-  isCustomPreview?: boolean;
 }
 
 const showcaseProjects: ShowcaseProject[] = [
@@ -55,34 +54,9 @@ const showcaseProjects: ShowcaseProject[] = [
     displayUrl: 'seo-rank-tracker-nu.vercel.app',
     icon: <Cpu className="w-4 h-4 text-[#FF5A1F]" />,
   },
-  {
-    id: 'jeevansetu',
-    index: '03',
-    kicker: 'Disaster Preparedness Platform',
-    title: 'JeevanSetu',
-    badge: 'SIH 2025 National Finalist',
-    summary: 'A mission-critical school emergency response platform created for Smart India Hackathon 2025, providing instantaneous hazard alerts, evacuation mapping, and AI assistance.',
-    bullets: [
-      'Engineered a real-time school emergency response system with immediate danger alerts, zone-based incident reporting, and automated drill workflows.',
-      'Integrated interactive map intelligence with emergency route plotting, safe assembly zones, and dynamic evacuation navigation.',
-      'Built conversational emergency AI assistance for disaster preparedness checklists, immediate first-aid protocols, and administrative coordination.',
-    ],
-    tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Maps API', 'WebSockets'],
-    liveUrl: 'https://github.com/vaibhavgupta88',
-    githubUrl: 'https://github.com/vaibhavgupta88',
-    displayUrl: 'jeevansetu.sih.gov.in',
-    icon: <Shield className="w-4 h-4 text-[#FF5A1F]" />,
-    isCustomPreview: true,
-  },
 ];
 
 export const ProjectShowcaseSection: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<Record<string, 'preview' | 'interactive'>>({
-    aven: 'preview',
-    rankpilot: 'preview',
-    jeevansetu: 'preview',
-  });
-
   return (
     <section id="projects" className="px-2 sm:px-4 max-w-5xl mx-auto w-full pt-16 pb-12">
       {/* Section Header */}
@@ -153,102 +127,32 @@ export const ProjectShowcaseSection: React.FC = () => {
 
                   {/* Browser Window Viewport Content */}
                   <div className="relative aspect-[16/10] sm:aspect-[16/10.5] w-full bg-[#FAFAF8] overflow-hidden flex flex-col justify-between">
-                    {project.isCustomPreview ? (
-                      /* Custom High-Fidelity UI Presentation for JeevanSetu SIH */
-                      <div className="w-full h-full p-6 sm:p-7 flex flex-col justify-between bg-gradient-to-br from-[#FAFAF8] via-white to-[#F2F2EE] relative overflow-hidden select-none">
-                        {/* Subtle Grid Pattern */}
-                        <div 
-                          className="absolute inset-0 opacity-[0.035] pointer-events-none"
-                          style={{
-                            backgroundImage: 'radial-gradient(#111 1px, transparent 1px)',
-                            backgroundSize: '16px 16px',
-                          }}
-                        />
+                    {/* Live Embedded Interactive Iframe / Visual Mockup */}
+                    <div className="w-full h-full relative group/frame">
+                      <iframe
+                        src={project.liveUrl}
+                        title={`${project.title} Preview`}
+                        className="w-[142%] h-[142%] transform scale-[0.704] origin-top-left border-0 bg-white pointer-events-none group-hover/frame:pointer-events-auto transition-opacity"
+                        loading="lazy"
+                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                      />
 
-                        {/* Top Mockup Status Bar */}
-                        <div className="relative z-10 flex items-center justify-between">
-                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-50 text-red-600 border border-red-200/80 text-[11px] font-semibold tracking-wide">
-                            <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-                            EMERGENCY READY • SIH 2025
-                          </span>
-                          <span className="text-[11px] font-mono text-[#8A8A85]">
-                            LAT 28.5355° N
-                          </span>
-                        </div>
-
-                        {/* Center Platform Mockup Card */}
-                        <div className="relative z-10 my-auto bg-white/90 backdrop-blur-md rounded-2xl p-5 border border-neutral-200/80 shadow-sm space-y-3">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2.5">
-                              <div className="w-8 h-8 rounded-xl bg-[#111111] text-white flex items-center justify-center font-bold text-xs">
-                                JS
-                              </div>
-                              <div>
-                                <h4 className="text-xs font-bold text-[#111111] leading-tight">
-                                  JeevanSetu Safety Network
-                                </h4>
-                                <p className="text-[10px] text-[#7A7A75]">
-                                  Campus Real-Time Disaster Response Platform
-                                </p>
-                              </div>
-                            </div>
-                            <span className="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 text-[10px] font-semibold border border-emerald-200">
-                              System Active
-                            </span>
-                          </div>
-
-                          <div className="grid grid-cols-3 gap-2 pt-1 text-center">
-                            <div className="bg-[#F8F8F6] p-2 rounded-xl border border-neutral-200/60">
-                              <span className="text-[9px] uppercase tracking-wider text-[#8A8A85] block">Evacuation</span>
-                              <span className="text-xs font-bold text-[#111111]">Auto Route</span>
-                            </div>
-                            <div className="bg-[#F8F8F6] p-2 rounded-xl border border-neutral-200/60">
-                              <span className="text-[9px] uppercase tracking-wider text-[#8A8A85] block">Alert Speed</span>
-                              <span className="text-xs font-bold text-[#FF5A1F]">&lt; 200ms</span>
-                            </div>
-                            <div className="bg-[#F8F8F6] p-2 rounded-xl border border-neutral-200/60">
-                              <span className="text-[9px] uppercase tracking-wider text-[#8A8A85] block">AI Protocol</span>
-                              <span className="text-xs font-bold text-[#111111]">Active Guide</span>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Bottom Action strip */}
-                        <div className="relative z-10 flex items-center justify-between pt-2 text-[11px] text-[#7A7A75]">
-                          <span>Built for schools & institutions</span>
-                          <span className="text-[#FF5A1F] font-medium flex items-center gap-1">
-                            GitHub Repository <ArrowUpRight className="w-3.5 h-3.5" />
-                          </span>
-                        </div>
+                      {/* Glassmorphic Hover Overlay with direct Launch CTA */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-end justify-between p-4 pointer-events-none">
+                        <span className="text-white text-xs font-medium backdrop-blur-md bg-black/40 px-3 py-1 rounded-full border border-white/20">
+                          {project.title} Live Deployment
+                        </span>
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FF5A1F] text-white text-xs font-semibold shadow-md pointer-events-auto hover:bg-[#E04F1B] transition-colors"
+                        >
+                          <span>Open Full App</span>
+                          <ArrowUpRight className="w-3.5 h-3.5" />
+                        </a>
                       </div>
-                    ) : (
-                      /* Live Embedded Interactive Iframe / Visual Mockup */
-                      <div className="w-full h-full relative group/frame">
-                        <iframe
-                          src={project.liveUrl}
-                          title={`${project.title} Preview`}
-                          className="w-[142%] h-[142%] transform scale-[0.704] origin-top-left border-0 bg-white pointer-events-none group-hover/frame:pointer-events-auto transition-opacity"
-                          loading="lazy"
-                          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                        />
-
-                        {/* Glassmorphic Hover Overlay with direct Launch CTA */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-end justify-between p-4 pointer-events-none">
-                          <span className="text-white text-xs font-medium backdrop-blur-md bg-black/40 px-3 py-1 rounded-full border border-white/20">
-                            {project.title} Live Deployment
-                          </span>
-                          <a
-                            href={project.liveUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FF5A1F] text-white text-xs font-semibold shadow-md pointer-events-auto hover:bg-[#E04F1B] transition-colors"
-                          >
-                            <span>Open Full App</span>
-                            <ArrowUpRight className="w-3.5 h-3.5" />
-                          </a>
-                        </div>
-                      </div>
-                    )}
+                    </div>
                   </div>
                 </div>
               </motion.div>
